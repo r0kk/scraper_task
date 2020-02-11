@@ -1,0 +1,18 @@
+version: '3.6'
+
+services:
+  mysqldb:
+    image: ${SQL_IMAGE}
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: master
+      MYSQL_USER: ${SQL_USERNAME}
+      MYSQL_PASSWORD:  ${SQL_PASSWORD}
+    ports:
+      - "3306:3306"
+
+networks:
+  default:
+    external: true
+    name: scraper_network
