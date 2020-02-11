@@ -1,6 +1,3 @@
-# scraper
-Scraper pipeline for web.archives
-
 # scrapper_task
 Scraper pipeline for web.archives
 
