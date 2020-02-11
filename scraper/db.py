@@ -4,7 +4,7 @@ from contextlib import contextmanager
 
 import sqlalchemy as sa
 import sqlalchemy.ext.declarative as sa_ext_decl
-from sqlalchemy import SMALLINT, VARCHAR, Column, Integer, DateTime, MetaData, Table
+from sqlalchemy import SMALLINT, VARCHAR, Column, Integer, DateTime
 
 Base = sa_ext_decl.declarative_base()
 
@@ -17,17 +17,6 @@ class TopPhones(Base):
     DAILY_HITS = Column(Integer)
 
 
-meta = MetaData()
-TOP_PHONES = Table(
-    "TOP_PHONES", meta,
-    Column("ID", Integer, primary_key=True),
-    Column("SNAP_TIME", DateTime),
-    Column("RANKING", SMALLINT),
-    Column("PHONE", VARCHAR(255)),
-    Column("DAILY_HITS", Integer),
-)
-
-
 def sessionmaker(debug=os.getenv("DEBUG", "false").lower() in {"true", "1"}):
     connection_str = "{driver}://{user}:{pwd}@{server}/{db_name}".format(
         driver="mysql+pymysql",
@@ -37,8 +26,6 @@ def sessionmaker(debug=os.getenv("DEBUG", "false").lower() in {"true", "1"}):
         db_name="master"
     )
     engine = sa.create_engine(connection_str, echo=debug)
-    # Only for the purpose of the task
-    meta.create_all(engine, checkfirst=True)
 
     @sa.event.listens_for(engine, "before_cursor_execute")
     def dummy_receive_before_cursor_execute(conn, cursor, statement, params, context, executemany):

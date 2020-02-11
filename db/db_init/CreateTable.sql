@@ -1,0 +1,8 @@
+CREATE TABLE TOP_PHONES (
+  ID integer NOT NULL AUTO_INCREMENT,
+  SNAP_TIME datetime,
+  RANKING integer,
+  PHONE varchar(255),
+  DAILY_HITS integer,
+  PRIMARY KEY (ID)
+);

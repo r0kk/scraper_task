@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mysqldb:
-    image: ${SQL_IMAGE}
+    image: mysql:8.0.19
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
@@ -11,6 +11,8 @@ services:
       MYSQL_PASSWORD:  ${SQL_PASSWORD}
     ports:
       - "3306:3306"
+    volumes:
+      - ./db_init:/docker-entrypoint-initdb.d
 
 networks:
   default:
