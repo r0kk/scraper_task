@@ -6,10 +6,9 @@ Scraper pipeline for web.archives
 docker network create scraper_network
 
 ##### Mysql
-cd mysql<br/>
+cd db <br/>
 docker-compose up
 
 ##### Scrapper
-docker-compose build<br/>
-docker-compose up
-
+cd scraper_task <br/>
+sh compose_pipeline.sh
